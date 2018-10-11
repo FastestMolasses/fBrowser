@@ -11,7 +11,7 @@ $ pip3 install fBrowser
 ### Browser Handler
 You can decorate your function with a browserHandler. This will create the driver and properly quit it if an exception occurs or when the program ends.
 
-```
+```python
 import fBrowser
 from time import sleep
 
@@ -28,7 +28,7 @@ main()
 ### New Tab
 Run a function in a new tab of Chrome. It will automatically close and switch contexts when it finishes executing.
 
-```
+```python
 import fBrowser
 from time import sleep
 
@@ -51,14 +51,14 @@ main()
 ### Login
 Use this helper function to login into a site. Simply pass in your email / username and your password. (This function assumes that the input tags in the form have attributes @type=username, @type=email, or @type=password).
 
-```
+```python
 import fBrowser
 
 
 @fBrowser.browserHandler()
 def main(driver):
     driver.get(
-        'https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f')
+        'https://stackoverflow.com/users/login')
     fBrowser.login(driver, email='testing@gmail.com', password='abc123')
 
 
@@ -68,7 +68,7 @@ main()
 ### Fill Inputs
 Quickly fill multiple inputs with either a single value or multiple values.
 
-```
+```python
 import fBrowser
 
 
@@ -91,7 +91,7 @@ main()
 ### Human Type
 Don't want to get flagged as a bot? Fill your inputs using a human-like typing speed.
 
-```
+```python
 import fBrowser
 from time import sleep
 
@@ -115,3 +115,15 @@ main()
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
+
+## Donate
+
+If you're feeling grateful and want to support future development, feel free to donate 😁
+
+---
+
+**BTC**: 3HZ5zJ4sDEfMgTsN3YXA2BhYZTEfiUhpsq
+
+**ETH**: 0x0D93Fc09CCfCADC099A24712AF090C30c287743D
+
+**LTC**: MJRZbebzeJF8DUoFtJvpqQNfh1UnNmMVe1
