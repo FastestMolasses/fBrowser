@@ -6,8 +6,12 @@ from random import uniform
 from selenium import webdriver
 
 
+# TODO: FIREFOX
+# TODO: DOC STRINGS
+
+
 def getChromeBrowser(proxy: str = None, implicitWaitTime: int = 30,
-                     incognito: bool=False):
+                     incognito: bool=False, headless: bool=False) -> webdriver.Chrome:
     chromeOptions = webdriver.ChromeOptions()
     chromeOptions.add_argument('disable-infobars')
 
@@ -15,6 +19,8 @@ def getChromeBrowser(proxy: str = None, implicitWaitTime: int = 30,
         chromeOptions.add_argument(f'--proxy-server={proxy}')
     if incognito:
         chromeOptions.add_argument("--incognito")
+    if headless:
+        chromeOptions.add_argument('--headless')
 
     driver = webdriver.Chrome(chrome_options=chromeOptions)
     driver.implicitly_wait(implicitWaitTime)
@@ -37,7 +43,7 @@ def browserHandler(proxy: str=None, implicitWaitTime: int = 30,
 
 
 def fillInputs(driver: webdriver.Chrome, inputXpaths: list = [],
-               values: Union[str, list]=[]):
+               values: Union[str, list]=[]) -> None:
     inputs = [driver.find_element_by_xpath(i) for i in inputXpaths]
 
     if isinstance(values, str):
@@ -50,12 +56,14 @@ def fillInputs(driver: webdriver.Chrome, inputXpaths: list = [],
 
 
 def login(driver: webdriver.Chrome, email: str = '',
-          username: str = '', password: str = ''):
+          username: str = '', password: str = '',
+          oneAtTime: bool=False) -> None:
     # TODO: CHECK IF ELEMENTS EXIST FIRST, IF NOT THROW ERROR
-
     if email:
+        email = email + '\n' if oneAtTime else email
         driver.find_element_by_xpath('//*[@type="email"]').send_keys(email)
     elif username:
+        username = username + '\n' if oneAtTime else username
         driver.find_element_by_xpath(
             '//*[@type="username"]').send_keys(username)
 
@@ -66,7 +74,7 @@ def login(driver: webdriver.Chrome, email: str = '',
 
 def humanType(driver: webdriver.Chrome,
               element: webdriver.remote.webelement,
-              value: str):
+              value: str) -> None:
     for i in value:
         element.send_keys(i)
         # Sleep a random amount between each key press

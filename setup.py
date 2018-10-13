@@ -5,8 +5,8 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="fBrowser",
-    version="0.1",
-    author="Abe Malla",
+    version="0.2",
+    author="Abe",
     author_email="",
     description="A small example package",
     long_description=longDescription,
