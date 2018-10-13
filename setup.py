@@ -5,7 +5,7 @@ with open("longDescription.md", "r") as f:
 
 setuptools.setup(
     name="fBrowser",
-    version="0.2.2",
+    version="0.2.5",
     author="Abe",
     author_email="",
     description="A small example package",
