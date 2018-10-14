@@ -1,11 +1,11 @@
 import setuptools
 
-with open("longDescription.md", "r") as f:
+with open("README.md", "r") as f:
     longDescription = f.read()
 
 setuptools.setup(
     name="fBrowser",
-    version="0.2.5",
+    version="0.2.6",
     author="Abe",
     author_email="",
     description="A small example package",

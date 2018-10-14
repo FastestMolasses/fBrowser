@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: fBrowser
-Version: 0.2.5
+Version: 0.2.6
 Summary: A small example package
 Home-page: https://github.com/FastestMolasses/fBrowser
 Author: Abe
@@ -123,6 +123,18 @@ Description: # fBrowser | Quick-start Your Selenium Project
         3. Commit your changes (`git commit -am 'Add some fooBar'`)
         4. Push to the branch (`git push origin feature/fooBar`)
         5. Create a new Pull Request
+        
+        ## Donate
+        
+        If you're feeling grateful and want to support future development, feel free to donate :)
+        
+        ---
+        
+        **BTC**: 3HZ5zJ4sDEfMgTsN3YXA2BhYZTEfiUhpsq
+        
+        **ETH**: 0x0D93Fc09CCfCADC099A24712AF090C30c287743D
+        
+        **LTC**: MJRZbebzeJF8DUoFtJvpqQNfh1UnNmMVe1
         
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3

@@ -118,7 +118,7 @@ main()
 
 ## Donate
 
-If you're feeling grateful and want to support future development, feel free to donate 😁
+If you're feeling grateful and want to support future development, feel free to donate :)
 
 ---
 
