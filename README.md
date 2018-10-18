@@ -25,6 +25,13 @@ def main(driver):
 main()
 ```
 
+You can also pass in these optional arguments:
+
+```python
+@fBrowser.browserHandler(proxy='<host/ip>:<port>', headless=True, 
+                         implicitWaitTime=60, incognito=True)
+```
+
 ### New Tab
 Run a function in a new tab of Chrome. It will automatically close and switch contexts when it finishes executing.
 
@@ -43,6 +50,29 @@ def main(driver):
     sleep(2)
     fBrowser.newTab(loadTheVerge)(driver)
     sleep(2)
+
+
+main()
+```
+
+You can also use the `newTab` function to decorate your selenium functions. Doing so will execute your function in a new tab of the browser. Your decorated function must have its first parameter for the webdriver.
+
+```python
+import fBrowser
+from time import sleep
+
+
+@fBrowser.newTab()
+def loadTheVerge(driver):
+    driver.get('https://www.theverge.com')
+    sleep(2)
+
+
+@fBrowser.browserHandler()
+def main(driver):
+    driver.get('https://www.google.com')
+    sleep(2)
+    loadTheVerge(driver)
 
 
 main()
