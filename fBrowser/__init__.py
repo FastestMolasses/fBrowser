@@ -4,15 +4,16 @@ from time import sleep
 from typing import Union
 from random import uniform
 from selenium import webdriver
-# TODO: FIREFOX
 # TODO: TAB / CONTEXT MANAGER
 
 
-def getChromeBrowser(proxy: str = None, implicitWaitTime: int = 30,
-                     incognito: bool=False, headless: bool=False) -> webdriver.Chrome:
+def getChromeBrowser(path: str='chromedriver', proxy: str=None,
+                     implicitWaitTime: int=30, incognito: bool=False,
+                     headless: bool=False) -> webdriver.Chrome:
     """
         Returns an instance of the webdriver for Chrome.
 
+        :param path: The path to your chromedriver\n
         :param proxy: Proxy to connect to - '<host>:<port>\n
         :param implicitWaitTime: Implicit wait time for the browser\n
         :param incognito: Whether to open in incognito or not\n
@@ -28,27 +29,73 @@ def getChromeBrowser(proxy: str = None, implicitWaitTime: int = 30,
     if headless:
         chromeOptions.add_argument('--headless')
 
-    driver = webdriver.Chrome(chrome_options=chromeOptions)
+    driver = webdriver.Chrome(
+        chrome_options=chromeOptions, executable_path=path)
     driver.implicitly_wait(implicitWaitTime)
     return driver
 
 
-def browserHandler(proxy: str=None, implicitWaitTime: int = 30,
-                   incognito: bool = False, headless: bool=False):
+def getFirefoxBrowser(path: str='geckodriver', proxy: str=None,
+                      implicitWaitTime: int=30, incognito: bool=False,
+                      headless: bool=False) -> webdriver.Firefox:
     """
-        Creates and handles the browser driver. Will automatically close
-        if an exception occurs or when the program ends.
+        Returns an instance of the webdriver for FireFox.
 
+        :param path: The path to your geckodriver\n
         :param proxy: Proxy to connect to - '<host>:<port>\n
         :param implicitWaitTime: Implicit wait time for the browser\n
         :param incognito: Whether to open in incognito or not\n
         :param headless: Run the browser in headless mode
     """
+    firefoxOptions = webdriver.FirefoxOptions()
+    firefoxProfile = webdriver.FirefoxProfile()
+
+    if headless:
+        firefoxOptions.set_headless()
+    if incognito:
+        firefoxProfile.set_preference(
+            "browser.privatebrowsing.autostart", True)
+    if proxy:
+        host, port = proxy.split(':')
+        firefoxProfile.set_preference("network.proxy.type", 1)
+        firefoxProfile.set_preference("network.proxy.http", host)
+        firefoxProfile.set_preference("network.proxy.http_port", int(port))
+
+    firefoxProfile.update_preferences()
+    driver = webdriver.Firefox(
+        firefox_options=firefoxOptions, executable_path=path,
+        firefox_profile=firefoxProfile)
+    driver.implicitly_wait(implicitWaitTime)
+    return driver
+
+
+def browserHandler(path: str=None, firefox: bool=False, proxy: str=None,
+                   implicitWaitTime: int=30, incognito: bool=False,
+                   headless: bool=False):
+    """
+        Creates and handles the browser driver. Will automatically close
+        if an exception occurs or when the program ends.
+
+        :param path: The path to your webdriver. Leave blank to use the default one\n
+        :param firefox: Boolean for whether to use Firefox over Chrome\n
+        :param proxy: Proxy to connect to - '<host>:<port>\n
+        :param implicitWaitTime: Implicit wait time for the browser\n
+        :param incognito: Whether to open in incognito or not\n
+        :param headless: Run the browser in headless mode
+    """
+    if not path:
+        path = 'geckodriver' if firefox else 'chromedriver'
+
     def bhWrapper(func):
         @functools.wraps(func)
         def bh(*args, **kwargs):
-            driver = getChromeBrowser(proxy, implicitWaitTime,
-                                      incognito, headless)
+            driver = None
+            if firefox:
+                driver = getFirefoxBrowser(path, proxy, implicitWaitTime,
+                                           incognito, headless)
+            else:
+                driver = getChromeBrowser(path, proxy, implicitWaitTime,
+                                          incognito, headless)
             try:
                 func(driver, *args, **kwargs)
             finally:
@@ -57,7 +104,7 @@ def browserHandler(proxy: str=None, implicitWaitTime: int = 30,
     return bhWrapper
 
 
-def fillInputs(driver: webdriver.Chrome, inputXpaths: list = [],
+def fillInputs(driver: webdriver.Chrome, inputXpaths: list=[],
                values: Union[str, list]=[]) -> None:
     """
         Fills a list of inputs with the specified value(s). If a list
@@ -81,8 +128,8 @@ def fillInputs(driver: webdriver.Chrome, inputXpaths: list = [],
             i.send_keys(j)
 
 
-def login(driver: webdriver.Chrome, email: str = '',
-          username: str = '', password: str = '',
+def login(driver: webdriver.Chrome, email: str='',
+          username: str='', password: str='',
           oneAtTime: bool=False, humanType: bool=False) -> None:
     """
         Will attempt to login to the current page. It will find elements

@@ -5,10 +5,10 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="fBrowser",
-    version="0.2.6",
+    version="0.3",
     author="Abe",
     author_email="",
-    description="A small example package",
+    description="Python3 library to make selenium webscraping easier",
     long_description=longDescription,
     long_description_content_type="text/markdown",
     url="https://github.com/FastestMolasses/fBrowser",
