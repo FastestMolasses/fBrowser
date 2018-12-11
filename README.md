@@ -12,11 +12,11 @@ $ pip3 install fBrowser
 You can decorate your function with a browserHandler. This will create the driver and properly quit it if an exception occurs or when the program ends.
 
 ```python
-import fBrowser
 from time import sleep
+from fBrowser import browserHandler
 
 
-@fBrowser.browserHandler()
+@browserHandler()
 def main(driver):
     driver.get('https://www.google.com')
     sleep(5)
@@ -28,47 +28,27 @@ main()
 You can also pass in these optional arguments:
 
 ```python
-@fBrowser.browserHandler(path='', firefox=False, proxy='<host/ip>:<port>', 
+@browserHandler(path='', firefox=False, proxy='<host/ip>:<port>', 
                          headless=True, implicitWaitTime=60, incognito=True)
 ```
 
 ### New Tab
-Run a function in a new tab of Chrome. It will automatically close and switch contexts when it finishes executing.
+Run a function in a new tab of Chrome. It will automatically close and switch contexts when it finishes executing. 
+
+You can use the `newTab` function to decorate your selenium functions. Doing so will execute your function in a new tab of the browser. Your decorated function must have its first parameter for the webdriver.
 
 ```python
-import fBrowser
 from time import sleep
+from fBrowser import browserHandler, newTab
 
 
-def loadTheVerge(driver):
-    driver.get('https://www.theverge.com')
-
-
-@fBrowser.browserHandler()
-def main(driver):
-    driver.get('https://www.google.com')
-    sleep(2)
-    fBrowser.newTab(loadTheVerge)(driver)
-    sleep(2)
-
-
-main()
-```
-
-You can also use the `newTab` function to decorate your selenium functions. Doing so will execute your function in a new tab of the browser. Your decorated function must have its first parameter for the webdriver.
-
-```python
-import fBrowser
-from time import sleep
-
-
-@fBrowser.newTab()
+@newTab
 def loadTheVerge(driver):
     driver.get('https://www.theverge.com')
     sleep(2)
 
 
-@fBrowser.browserHandler()
+@browserHandler()
 def main(driver):
     driver.get('https://www.google.com')
     sleep(2)
@@ -83,9 +63,10 @@ Use this helper function to login into a site. Simply pass in your email / usern
 
 ```python
 import fBrowser
+from fBrowser import browserHandler
 
 
-@fBrowser.browserHandler()
+@browserHandler()
 def main(driver):
     driver.get(
         'https://stackoverflow.com/users/login')
@@ -100,9 +81,10 @@ Quickly fill multiple inputs with either a single value or multiple values.
 
 ```python
 import fBrowser
+from fBrowser import browserHandler
 
 
-@fBrowser.browserHandler()
+@browserHandler()
 def main(driver):
     driver.get('example.com')
     # A list of xpaths to the inputs
@@ -124,9 +106,10 @@ Don't want to get flagged as a bot? Fill your inputs using a human-like typing s
 ```python
 import fBrowser
 from time import sleep
+from fBrowser import browserHandler
 
 
-@fBrowser.browserHandler()
+@browserHandler()
 def main(driver):
     driver.get('https://www.google.com')
     chatInput = driver.find_element_by_xpath('//*[@name="q"]')

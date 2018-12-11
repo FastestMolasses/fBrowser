@@ -62,3 +62,4 @@ env.bak/
 venv.bak/
 
 .vscode/
+geckodriver.log

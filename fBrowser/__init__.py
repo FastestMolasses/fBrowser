@@ -50,6 +50,10 @@ def getFirefoxBrowser(path: str='geckodriver', proxy: str=None,
     firefoxOptions = webdriver.FirefoxOptions()
     firefoxProfile = webdriver.FirefoxProfile()
 
+    # This is to make sure that new tabs will not be opened in a new window
+    firefoxProfile.set_preference("browser.link.open_newwindow", 3)
+    firefoxProfile.set_preference("browser.link.open_newwindow.restriction", 2)
+
     if headless:
         firefoxOptions.set_headless()
     if incognito:

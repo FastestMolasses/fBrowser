@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="fBrowser",
-    version="0.3",
+    version="0.3.1",
     author="Abe",
     author_email="",
     description="Python3 library to make selenium webscraping easier",
