@@ -28,8 +28,8 @@ main()
 You can also pass in these optional arguments:
 
 ```python
-@fBrowser.browserHandler(proxy='<host/ip>:<port>', headless=True, 
-                         implicitWaitTime=60, incognito=True)
+@fBrowser.browserHandler(path='', firefox=False, proxy='<host/ip>:<port>', 
+                         headless=True, implicitWaitTime=60, incognito=True)
 ```
 
 ### New Tab
