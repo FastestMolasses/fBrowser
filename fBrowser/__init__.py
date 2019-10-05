@@ -7,9 +7,9 @@ from selenium import webdriver
 # TODO: TAB / CONTEXT MANAGER
 
 
-def getChromeBrowser(path: str='chromedriver', proxy: str=None,
-                     implicitWaitTime: int=30, incognito: bool=False,
-                     headless: bool=False) -> webdriver.Chrome:
+def getChromeBrowser(path: str = 'chromedriver', proxy: str = None,
+                     implicitWaitTime: int = 30, incognito: bool = False,
+                     headless: bool = False) -> webdriver.Chrome:
     """
         Returns an instance of the webdriver for Chrome.
 
@@ -35,9 +35,9 @@ def getChromeBrowser(path: str='chromedriver', proxy: str=None,
     return driver
 
 
-def getFirefoxBrowser(path: str='geckodriver', proxy: str=None,
-                      implicitWaitTime: int=30, incognito: bool=False,
-                      headless: bool=False) -> webdriver.Firefox:
+def getFirefoxBrowser(path: str = 'geckodriver', proxy: str = None,
+                      implicitWaitTime: int = 30, incognito: bool = False,
+                      headless: bool = False) -> webdriver.Firefox:
     """
         Returns an instance of the webdriver for FireFox.
 
@@ -73,9 +73,9 @@ def getFirefoxBrowser(path: str='geckodriver', proxy: str=None,
     return driver
 
 
-def browserHandler(path: str=None, firefox: bool=False, proxy: str=None,
-                   implicitWaitTime: int=30, incognito: bool=False,
-                   headless: bool=False):
+def browserHandler(path: str = None, firefox: bool = False, proxy: str = None,
+                   implicitWaitTime: int = 30, incognito: bool = False,
+                   headless: bool = False):
     """
         Creates and handles the browser driver. Will automatically close
         if an exception occurs or when the program ends.
@@ -108,8 +108,8 @@ def browserHandler(path: str=None, firefox: bool=False, proxy: str=None,
     return bhWrapper
 
 
-def fillInputs(driver: webdriver.Chrome, inputXpaths: list=[],
-               values: Union[str, list]=[]) -> None:
+def fillInputs(driver: webdriver.Chrome, inputXpaths: list = [],
+               values: Union[str, list] = []) -> None:
     """
         Fills a list of inputs with the specified value(s). If a list
         is passed, then the inputs will be filled with each value respectively.
@@ -132,9 +132,9 @@ def fillInputs(driver: webdriver.Chrome, inputXpaths: list=[],
             i.send_keys(j)
 
 
-def login(driver: webdriver.Chrome, email: str='',
-          username: str='', password: str='',
-          oneAtTime: bool=False, humanType: bool=False) -> None:
+def login(driver: webdriver.Chrome, email: str = '',
+          username: str = '', password: str = '',
+          oneAtTime: bool = False, humanType: bool = False) -> None:
     """
         Will attempt to login to the current page. It will find elements
         that have the 'type' attribute associating it with an email, username,

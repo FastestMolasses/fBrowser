@@ -1,7 +1,9 @@
 # fBrowser | Quick-start Your Selenium Project
+
 This library was created in order to help users quick-start their webscraping project. It includes several useful functions including a browser handler, new tab functionality, and more.
 
 ## Installation
+
 ```
 $ pip3 install fBrowser
 ```
@@ -9,6 +11,7 @@ $ pip3 install fBrowser
 ## Usage
 
 ### Browser Handler
+
 You can decorate your function with a browserHandler. This will create the driver and properly quit it if an exception occurs or when the program ends.
 
 ```python
@@ -28,12 +31,13 @@ main()
 You can also pass in these optional arguments:
 
 ```python
-@browserHandler(path='', firefox=False, proxy='<host/ip>:<port>', 
-                         headless=True, implicitWaitTime=60, incognito=True)
+@browserHandler(path='', firefox=False, proxy='<host/ip>:<port>',
+                headless=True, implicitWaitTime=60, incognito=True)
 ```
 
 ### New Tab
-Run a function in a new tab of Chrome. It will automatically close and switch contexts when it finishes executing. 
+
+Run a function in a new tab of Chrome. It will automatically close and switch contexts when it finishes executing.
 
 You can use the `newTab` function to decorate your selenium functions. Doing so will execute your function in a new tab of the browser. Your decorated function must have its first parameter for the webdriver.
 
@@ -59,6 +63,7 @@ main()
 ```
 
 ### Login
+
 Use this helper function to login into a site. Simply pass in your email / username and your password. (This function assumes that the input tags in the form have attributes @type=username, @type=email, or @type=password).
 
 ```python
@@ -77,6 +82,7 @@ main()
 ```
 
 ### Fill Inputs
+
 Quickly fill multiple inputs with either a single value or multiple values.
 
 ```python
@@ -101,6 +107,7 @@ main()
 ```
 
 ### Human Type
+
 Don't want to get flagged as a bot? Fill your inputs using a human-like typing speed.
 
 ```python
@@ -128,15 +135,3 @@ main()
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
-
-## Donate
-
-If you're feeling grateful and want to support future development, feel free to donate :)
-
----
-
-**BTC**: 3HZ5zJ4sDEfMgTsN3YXA2BhYZTEfiUhpsq
-
-**ETH**: 0x0D93Fc09CCfCADC099A24712AF090C30c287743D
-
-**LTC**: MJRZbebzeJF8DUoFtJvpqQNfh1UnNmMVe1

@@ -1,15 +1,17 @@
 Metadata-Version: 2.1
 Name: fBrowser
-Version: 0.2.6
-Summary: A small example package
+Version: 0.3.1
+Summary: Python3 library to make selenium webscraping easier
 Home-page: https://github.com/FastestMolasses/fBrowser
 Author: Abe
 Author-email: 
 License: UNKNOWN
 Description: # fBrowser | Quick-start Your Selenium Project
+        
         This library was created in order to help users quick-start their webscraping project. It includes several useful functions including a browser handler, new tab functionality, and more.
         
         ## Installation
+        
         ```
         $ pip3 install fBrowser
         ```
@@ -17,14 +19,15 @@ Description: # fBrowser | Quick-start Your Selenium Project
         ## Usage
         
         ### Browser Handler
+        
         You can decorate your function with a browserHandler. This will create the driver and properly quit it if an exception occurs or when the program ends.
         
         ```python
-        import fBrowser
         from time import sleep
+        from fBrowser import browserHandler
         
         
-        @fBrowser.browserHandler()
+        @browserHandler()
         def main(driver):
             driver.get('https://www.google.com')
             sleep(5)
@@ -33,37 +36,50 @@ Description: # fBrowser | Quick-start Your Selenium Project
         main()
         ```
         
-        ### New Tab
-        Run a function in a new tab of Chrome. It will automatically close and switch contexts when it finishes executing.
+        You can also pass in these optional arguments:
         
         ```python
-        import fBrowser
+        @browserHandler(path='', firefox=False, proxy='<host/ip>:<port>',
+                        headless=True, implicitWaitTime=60, incognito=True)
+        ```
+        
+        ### New Tab
+        
+        Run a function in a new tab of Chrome. It will automatically close and switch contexts when it finishes executing.
+        
+        You can use the `newTab` function to decorate your selenium functions. Doing so will execute your function in a new tab of the browser. Your decorated function must have its first parameter for the webdriver.
+        
+        ```python
         from time import sleep
+        from fBrowser import browserHandler, newTab
         
         
+        @newTab
         def loadTheVerge(driver):
             driver.get('https://www.theverge.com')
+            sleep(2)
         
         
-        @fBrowser.browserHandler()
+        @browserHandler()
         def main(driver):
             driver.get('https://www.google.com')
             sleep(2)
-            fBrowser.newTab(loadTheVerge)(driver)
-            sleep(2)
+            loadTheVerge(driver)
         
         
         main()
         ```
         
         ### Login
+        
         Use this helper function to login into a site. Simply pass in your email / username and your password. (This function assumes that the input tags in the form have attributes @type=username, @type=email, or @type=password).
         
         ```python
         import fBrowser
+        from fBrowser import browserHandler
         
         
-        @fBrowser.browserHandler()
+        @browserHandler()
         def main(driver):
             driver.get(
                 'https://stackoverflow.com/users/login')
@@ -74,13 +90,15 @@ Description: # fBrowser | Quick-start Your Selenium Project
         ```
         
         ### Fill Inputs
+        
         Quickly fill multiple inputs with either a single value or multiple values.
         
         ```python
         import fBrowser
+        from fBrowser import browserHandler
         
         
-        @fBrowser.browserHandler()
+        @browserHandler()
         def main(driver):
             driver.get('example.com')
             # A list of xpaths to the inputs
@@ -97,14 +115,16 @@ Description: # fBrowser | Quick-start Your Selenium Project
         ```
         
         ### Human Type
+        
         Don't want to get flagged as a bot? Fill your inputs using a human-like typing speed.
         
         ```python
         import fBrowser
         from time import sleep
+        from fBrowser import browserHandler
         
         
-        @fBrowser.browserHandler()
+        @browserHandler()
         def main(driver):
             driver.get('https://www.google.com')
             chatInput = driver.find_element_by_xpath('//*[@name="q"]')
@@ -123,18 +143,6 @@ Description: # fBrowser | Quick-start Your Selenium Project
         3. Commit your changes (`git commit -am 'Add some fooBar'`)
         4. Push to the branch (`git push origin feature/fooBar`)
         5. Create a new Pull Request
-        
-        ## Donate
-        
-        If you're feeling grateful and want to support future development, feel free to donate :)
-        
-        ---
-        
-        **BTC**: 3HZ5zJ4sDEfMgTsN3YXA2BhYZTEfiUhpsq
-        
-        **ETH**: 0x0D93Fc09CCfCADC099A24712AF090C30c287743D
-        
-        **LTC**: MJRZbebzeJF8DUoFtJvpqQNfh1UnNmMVe1
         
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
