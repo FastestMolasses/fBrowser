@@ -1,8 +1,0 @@
-README.md
-setup.cfg
-setup.py
-fBrowser/__init__.py
-fBrowser.egg-info/PKG-INFO
-fBrowser.egg-info/SOURCES.txt
-fBrowser.egg-info/dependency_links.txt
-fBrowser.egg-info/top_level.txt
